@@ -6,7 +6,7 @@ const gallery = document.querySelector(".gallery");
 const modalContainer = document.querySelector(".modal-container");
 
 // const cardContainer = document.querySelector(".card");
-// modalContainer.style.display = "none";
+
 
 const modalClose = document.querySelector(".modal-close-btn")
 const searchBox = document.querySelector(".search-input");
@@ -55,3 +55,32 @@ function displayEmployees(employeeData) {
     gallery.innerHTML = employeeHTML;
 }
 
+//display modal
+function displayModal(index) {
+    // use object destructuring make our template literal cleaner
+    console.log(index);
+    let { name, dob, phone, email, location: { city, street, state, postcode
+    }, picture } = employees[index];
+
+    let date = new Date(dob.date);
+
+    const modalHTML = `
+    <img class="avatar" src="${picture.large}" />
+    <div class="text-container">
+    <h2 class="name">${name.first} ${name.last}</h2>
+    <p class="email">${email}</p>
+    <p class="address">${city}</p>
+    <hr />
+    <p>${phone}</p>
+    <p class="address">${street.number}, ${street.name}, ${state}, ${postcode}</p>
+    <p>Birthday:
+    ${date.getMonth()}/${date.getDate()}/${date.getFullYear()}</p>
+    </div>
+    `;
+
+
+    overlay.classList.remove("hidden");
+    modalContainer.innerHTML = modalHTML;
+    modalIndex = index;
+
+};
