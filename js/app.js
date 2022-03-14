@@ -8,12 +8,10 @@ const searchBox = document.querySelector(".search-input");
 const gallery = document.querySelector(".gallery");
 const modalContainer = document.querySelector(".modal-container");
 modalContainer.style.display = "none";
-const modalClose = document.querySelector(".modal-close-btn")
-const modalBtn = document.querySelectorAll('modal-btn-container .btn');
-const previous = document.querySelector(".modal-prev");
-const next = document.querySelector(".modal-next");
-let modalIndex = 0;
+// const modal = document.querySelector(".modal");
+// const modalBtn = document.querySelectorAll('modal-btn-container .btn');
 
+let modalIndex = 0;
 
 
 // fetch data from API
@@ -31,7 +29,7 @@ function displayEmployees(employeeData) {
     // store the employee HTML as we create it
     let employeeHTML = '';
 
-    // loop through each employee and create HTML markup and display index
+    // for each employee and index, run the arrow function...
     employees.forEach((employee, index) => {
         let name = employee.name;
         let email = employee.email;
@@ -42,7 +40,7 @@ function displayEmployees(employeeData) {
         // template literals make this so much cleaner!
         employeeHTML +=
 
- `<div class="card" data-index="${index}">
+            `<div class="card" data-index="${index}">
     <div class="card-img-container">
         <img class="card-img" src="${picture.large}" alt="profile picture">
     </div>
@@ -58,10 +56,15 @@ function displayEmployees(employeeData) {
 
 //display modal
 function displayModal(index) {
-    // use object destructuring make our template literal cleaner
-    // console.log(index);
+
+    // Using the information from the employees array, at the index passed to this function.
+    // Using object destructuring make our template literal cleaner so if employee[index] has those properties, 
+    // those variables are assigned to it
+
     let { name, dob, phone, email, location: { city, street, state, postcode
     }, picture } = employees[index];
+
+    // console.log(employees[index]);
 
     let date = new Date(dob.date);
 
@@ -90,9 +93,42 @@ function displayModal(index) {
     </div>
     `;
 
-    modalContainer.style.display ="block";
+    modalContainer.style.display = "block";
     modalContainer.innerHTML = modalHTML;
     modalIndex = index;
+    const modalClose = document.querySelector(".modal-close-btn");
+    
+    //modal close
+    modalClose.addEventListener("click", (e) => {
+
+        modalContainer.style.display = "none";
+        
+    });
+
+    // adding functionaility to switch between modals
+
+    const previous = document.querySelector(".modal-prev");
+    const next = document.querySelector(".modal-next");
+    
+    modalContainer.addEventListener("click", (e) => {
+     if(e.target === previous) {
+        console.log('previous');
+
+    }
+
+    if(e.target === next) {
+        console.log('next');
+
+    }
+    
+
+
+
+
+});
+
+
+
 
 };
 
@@ -103,7 +139,7 @@ function displayModal(index) {
 gallery.addEventListener("click", (e) => {
 
     if (e.target !== gallery) {
-         // select the card element based on its proximity to element clicked
+        // select the card element based on its proximity to element clicked
         const card = e.target.closest(".card");
         const index = card.getAttribute('data-index');
         displayModal(index);
@@ -111,3 +147,26 @@ gallery.addEventListener("click", (e) => {
     }
 
 });
+
+//adding name search functionaility
+
+
+searchBox.addEventListener("keydown", (e) => {
+
+    const employeeNames = document.querySelectorAll(".card-info-container #name");
+    console.log(employeeNames);
+    let searchTerm = e.target.value.toLowerCase();
+
+
+    employeeNames.forEach(name => {
+        if (name.textContent.toLowerCase().includes(searchTerm)) {
+            name.parentElement.parentElement.style.display = "block";
+        }
+        else {
+            name.parentElement.parentElement.style.display = "none";
+        }
+    })
+
+})
+
+
