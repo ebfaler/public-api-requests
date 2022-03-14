@@ -110,7 +110,6 @@ function displayModal(index) {
 
     modalContainer.addEventListener("click", (e) => {
         if (e.target === previous) {
-            console.log('previous');
             if (typeof modalIndex === 'string') {
                 modalIndex = parseInt(modalIndex, 10);
             }
@@ -125,7 +124,7 @@ function displayModal(index) {
         }
 
         if (e.target === next) {
-            console.log('next');
+    
             if (typeof modalIndex === 'string') {
                 modalIndex = parseInt(modalIndex, 10);
             }
