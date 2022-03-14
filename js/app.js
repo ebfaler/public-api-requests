@@ -8,8 +8,7 @@ const searchBox = document.querySelector(".search-input");
 const gallery = document.querySelector(".gallery");
 const modalContainer = document.querySelector(".modal-container");
 modalContainer.style.display = "none";
-// const modal = document.querySelector(".modal");
-// const modalBtn = document.querySelectorAll('modal-btn-container .btn');
+
 
 let modalIndex = 0;
 
@@ -65,11 +64,8 @@ function displayModal(index) {
     let { name, dob, phone, email, location: { city, street, state, postcode
     }, picture } = employees[index];
 
-    // console.log(employees[index]);
-    
-
+  
     let date = new Date(dob.date);
-    console.log(date);
 
     const modalHTML = `
     <div class="modal-container">
@@ -156,7 +152,7 @@ gallery.addEventListener("click", (e) => {
         const card = e.target.closest(".card");
         const index = card.getAttribute('data-index');
         displayModal(index);
-        console.log("card clicked");
+      
     }
 
 });
@@ -167,7 +163,6 @@ gallery.addEventListener("click", (e) => {
 searchBox.addEventListener("input", (e) => {
 
     const employeeNames = document.querySelectorAll("#name");
-    console.log(employeeNames);
     let searchTerm = e.target.value.toLowerCase();
 
 
