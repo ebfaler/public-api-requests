@@ -49,7 +49,8 @@ function displayEmployees(employeeData) {
         <p class="card-text">${email}</p>
         <p class="card-text cap">${city}, ${state}</p>
     </div>
- </div>`
+ </div>
+ `
     });
     gallery.innerHTML = employeeHTML;
 }
@@ -160,9 +161,9 @@ gallery.addEventListener("click", (e) => {
 //adding name search functionaility
 
 
-searchBox.addEventListener("keydown", (e) => {
+searchBox.addEventListener("input", (e) => {
 
-    const employeeNames = document.querySelectorAll(".card-info-container #name");
+    const employeeNames = document.querySelectorAll("#name");
     console.log(employeeNames);
     let searchTerm = e.target.value.toLowerCase();
 
