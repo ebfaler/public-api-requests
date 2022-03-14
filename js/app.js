@@ -66,8 +66,10 @@ function displayModal(index) {
     }, picture } = employees[index];
 
     // console.log(employees[index]);
+    
 
     let date = new Date(dob.date);
+    console.log(date);
 
     const modalHTML = `
     <div class="modal-container">
@@ -81,7 +83,7 @@ function displayModal(index) {
                         <hr>
                         <p class="modal-text">${phone}</p>
                         <p class="modal-text">${street.number}, ${street.name}, ${state}, ${postcode}</p>
-                        <p class="modal-text">Birthday: ${date.getMonth()}/${date.getDate()}/${date.getFullYear()}</p>
+                        <p class="modal-text">Birthday: ${date.getMonth()+1}/${date.getDate()}/${date.getFullYear()}</p>
                     </div>
                 </div>
 
@@ -96,6 +98,7 @@ function displayModal(index) {
     modalContainer.innerHTML = modalHTML;
     modalIndex = index;
     const modalClose = document.querySelector(".modal-close-btn");
+    
 
     //modal close
     modalClose.addEventListener("click", (e) => {
@@ -170,7 +173,7 @@ searchBox.addEventListener("input", (e) => {
 
     employeeNames.forEach(name => {
         if (name.textContent.toLowerCase().includes(searchTerm)) {
-            name.parentElement.parentElement.style.display = "block";
+            name.parentElement.parentElement.style.display = "flex";
         }
         else {
             name.parentElement.parentElement.style.display = "none";
