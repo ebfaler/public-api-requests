@@ -70,21 +70,19 @@ function displayModal(index) {
 
     const modalHTML = `
     <div class="modal-container">
-        <div class="modal">
-            <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
-            <div class="modal-info-container">
-               <img class="avatar" src="${picture.large}" />
-               <div class="text-container">
-               <h2 class="name">${name.first} ${name.last}</h2>
-               <p class="email">${email}</p>
-               <p class="address">${city}</p>
-               <hr />
-               <p>${phone}</p>
-               <p class="address">${street.number}, ${street.name}, ${state}, ${postcode}</p>
-               <p>Birthday:
-               ${date.getMonth()}/${date.getDate()}/${date.getFullYear()}</p>
-            </div>
-        </div>
+                <div class="modal">
+                    <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
+                    <div class="modal-info-container">
+                        <img class="modal-img" src="${picture.large}">
+                        <h3 id="name" class="modal-name cap">${name.first} ${name.last}</h3>
+                        <p class="modal-text">${email}</p>
+                        <p class="modal-text cap">${city}</p>
+                        <hr>
+                        <p class="modal-text">${phone}</p>
+                        <p class="modal-text">${street.number}, ${street.name}, ${state}, ${postcode}</p>
+                        <p class="modal-text">Birthday: ${date.getMonth()}/${date.getDate()}/${date.getFullYear()}</p>
+                    </div>
+                </div>
 
         <div class="modal-btn-container">
             <button type="button" id="modal-prev" class="modal-prev btn">Prev</button>
@@ -97,38 +95,49 @@ function displayModal(index) {
     modalContainer.innerHTML = modalHTML;
     modalIndex = index;
     const modalClose = document.querySelector(".modal-close-btn");
-    
+
     //modal close
     modalClose.addEventListener("click", (e) => {
 
         modalContainer.style.display = "none";
-        
+
     });
 
     // adding functionaility to switch between modals
 
     const previous = document.querySelector(".modal-prev");
     const next = document.querySelector(".modal-next");
-    
+
     modalContainer.addEventListener("click", (e) => {
-     if(e.target === previous) {
-        console.log('previous');
-
-    }
-
-    if(e.target === next) {
-        console.log('next');
-
-    }
-    
-
-
-
-
-});
+        if (e.target === previous) {
+            console.log('previous');
+            if (typeof modalIndex === 'string') {
+                modalIndex = parseInt(modalIndex, 10);
+            }
+            if (modalIndex === 0) {
+                displayModal(11);
+            } else {
+                modalIndex--;
+                displayModal(modalIndex);
+            }
 
 
+        }
 
+        if (e.target === next) {
+            console.log('next');
+            if (typeof modalIndex === 'string') {
+                modalIndex = parseInt(modalIndex, 10);
+            }
+            if (modalIndex === 11) {
+                displayModal(0);
+            } else {
+                modalIndex++;
+                displayModal(modalIndex);
+            }
+
+        }
+    });
 
 };
 

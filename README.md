@@ -6,4 +6,8 @@ I have built an app for a fictional company called Awesome Startup. Employees ar
 
 I have used the Random User Generator API (https://randomuser.me/) to grab information for 12 random “employees,”. A JSON object is reqeusted from the API and data is parsed so that 12 employees are listed in a grid with their thumbnail image, full name, email, and location. Clicking the employee’s image or name will open a modal window with more detailed information, such as the employee’s birthday and address.
 
+Styling Changes:
+* Updated background color of the body and modal buttons
+* Increased font-size of the header
+
 Link to live project: https://ebfaler.github.io/public-api-requests
